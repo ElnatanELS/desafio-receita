@@ -16,5 +16,5 @@ public class Conta {
 	private String conta;
 	private Double saldo;
 	private String status;
-
+	private String resultado;
 }

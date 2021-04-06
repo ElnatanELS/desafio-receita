@@ -1,4 +1,4 @@
-package com.southsystem.desafioreceita.batch.configuracao;
+package com.southsystem.desafioreceita.batch.configuration;
 
 import org.springframework.batch.core.Job;
 import org.springframework.batch.core.Step;
@@ -15,9 +15,11 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.core.io.FileSystemResource;
 import org.springframework.core.io.Resource;
 
-import com.southsystem.desafioreceita.batch.leitor.CSVContaLeitor;
-import com.southsystem.desafioreceita.batch.notificacao.JobListener;
-import com.southsystem.desafioreceita.batch.notificacao.StepListener;
+import com.southsystem.desafioreceita.batch.notification.JobListener;
+import com.southsystem.desafioreceita.batch.notification.StepListener;
+import com.southsystem.desafioreceita.batch.processor.ContaToReceitaProcessor;
+import com.southsystem.desafioreceita.batch.reader.CSVContaReader;
+import com.southsystem.desafioreceita.batch.writer.CSVContaWriter;
 import com.southsystem.desafioreceita.entidades.Conta;
 
 @EnableBatchProcessing
@@ -31,7 +33,7 @@ public class ContaJob {
 	private StepBuilderFactory stepBuilderFactory;
 
 	@Autowired
-	private CSVContaLeitor csvLeitor;
+	private CSVContaReader csvReader;
 
 	@Autowired
 	private JobListener jobListener;
@@ -39,32 +41,11 @@ public class ContaJob {
 	@Autowired
 	private StepListener stepListener;
 
-	private Resource outputResource = new FileSystemResource("C:/output/outputData.csv");
+	@Autowired
+	private ContaToReceitaProcessor contaToReceitaProcessor;
 
-	@Bean
-	public FlatFileItemWriter<Conta> writer() {
-		// Create writer instance
-		FlatFileItemWriter<Conta> writer = new FlatFileItemWriter<>();
-
-		// Set output file location
-		writer.setResource(outputResource);
-
-		// All job repetitions should "append" to same output file
-		writer.setAppendAllowed(true);
-
-		// Name field values sequence based on object properties
-		writer.setLineAggregator(new DelimitedLineAggregator<Conta>() {
-			{
-				setDelimiter(";");
-				setFieldExtractor(new BeanWrapperFieldExtractor<Conta>() {
-					{
-						setNames(new String[] { "agencia", "conta", "saldo", "status" });
-					}
-				});
-			}
-		});
-		return writer;
-	}
+	@Autowired
+	private CSVContaWriter csvWriter;
 
 	@Bean
 	public Job jobConta() {
@@ -81,8 +62,9 @@ public class ContaJob {
 				.get("step1")
 				.listener(stepListener)
 				.<Conta, Conta>chunk(300)
-				.reader(csvLeitor)
-				.writer(writer()).build();
+				.reader(csvReader)
+				.processor(contaToReceitaProcessor)
+				.writer(csvWriter).build();
 	}
 
 }

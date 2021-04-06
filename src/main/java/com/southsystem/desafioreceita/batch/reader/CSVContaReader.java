@@ -1,4 +1,4 @@
-package com.southsystem.desafioreceita.batch.leitor;
+package com.southsystem.desafioreceita.batch.reader;
 
 import org.springframework.batch.item.file.FlatFileItemReader;
 import org.springframework.batch.item.file.LineMapper;
@@ -14,11 +14,11 @@ import com.southsystem.desafioreceita.batch.mapper.ContaFieldSetMapper;
 import com.southsystem.desafioreceita.entidades.Conta;
 
 @Component
-public class CSVContaLeitor extends FlatFileItemReader<Conta> {
+public class CSVContaReader extends FlatFileItemReader<Conta> {
 	
 	private Resource inputResource = new FileSystemResource("C:/entrada/in.csv");
 
-	public CSVContaLeitor() {
+	public CSVContaReader() {
 		setResource(inputResource);
 		setLinesToSkip(1);
 		setLineMapper(lineMapper());

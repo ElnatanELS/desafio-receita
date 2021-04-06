@@ -1,4 +1,4 @@
-package com.southsystem.desafioreceita.batch.notificacao;
+package com.southsystem.desafioreceita.batch.notification;
 
 import org.springframework.batch.core.JobExecution;
 import org.springframework.batch.core.JobExecutionListener;

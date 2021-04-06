@@ -14,7 +14,7 @@ public class ContaFieldSetMapper implements FieldSetMapper<Conta> {
 		return Conta.builder()
 			.agencia(fieldSet.readString("agencia"))
 			.conta(fieldSet.readString("conta"))
-			.saldo(fieldSet.readDouble("saldo"))
+			.saldo(Double.parseDouble(fieldSet.readString("saldo").replaceAll(",",".")))
 			.status(fieldSet.readString("status"))
 			.build();
 	}
