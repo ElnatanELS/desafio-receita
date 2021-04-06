@@ -1,4 +1,4 @@
-package com.southsystem.desafioreceita.sincronizacaoreceita;
+package com.southsystem.desafioreceita.services;
 
 import java.util.ArrayList;
 import java.util.List;

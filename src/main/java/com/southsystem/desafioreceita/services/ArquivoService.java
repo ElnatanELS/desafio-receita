@@ -1,4 +1,4 @@
-package com.southsystem.desafioreceita.sincronizacaoreceita;
+package com.southsystem.desafioreceita.services;
 
 import java.io.BufferedReader;
 import java.io.IOException;
