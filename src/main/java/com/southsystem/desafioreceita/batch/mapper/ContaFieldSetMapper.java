@@ -5,7 +5,11 @@ import org.springframework.batch.item.file.transform.FieldSet;
 import org.springframework.validation.BindException;
 
 import com.southsystem.desafioreceita.entidades.Conta;
-
+/**
+ * Classe para mapear a entidade de entrada
+ * @author Elnatan Emanuel
+ *
+ */
 public class ContaFieldSetMapper implements FieldSetMapper<Conta> {
 
 	@Override

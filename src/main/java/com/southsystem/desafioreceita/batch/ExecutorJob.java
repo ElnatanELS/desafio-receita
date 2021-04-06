@@ -8,6 +8,12 @@ import org.springframework.batch.core.launch.JobLauncher;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
+
+/**
+ * Classe que inicializa o job do Bacth 
+ * @author Elnatan Emanuel
+ *
+ */
 @Component
 public class ExecutorJob {
 	@Autowired

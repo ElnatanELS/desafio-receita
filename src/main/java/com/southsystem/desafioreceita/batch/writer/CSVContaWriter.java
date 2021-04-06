@@ -10,10 +10,16 @@ import org.springframework.stereotype.Component;
 
 import com.southsystem.desafioreceita.entidades.Conta;
 
+/**
+ * Classe que gera o arquivo csv das contas 
+ * @author Elnatan Emanuel
+ *
+ */
+
 @Component
 public class CSVContaWriter extends FlatFileItemWriter<Conta> {
 	
-	private Resource outputResource = new FileSystemResource("C:/output/outputData.csv");
+	private Resource outputResource = new FileSystemResource("C:/saida/ContasAutalizadas.csv");
 	
 	public CSVContaWriter() {
 		setResource(outputResource);

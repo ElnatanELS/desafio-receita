@@ -13,10 +13,15 @@ import org.springframework.stereotype.Component;
 import com.southsystem.desafioreceita.batch.mapper.ContaFieldSetMapper;
 import com.southsystem.desafioreceita.entidades.Conta;
 
+/**
+ * Classe que faz as leitura do arquivo pdf
+ * @author Elnatan Emanuel
+ *
+ */
 @Component
 public class CSVContaReader extends FlatFileItemReader<Conta> {
 	
-	private Resource inputResource = new FileSystemResource("C:/entrada/in.csv");
+	private Resource inputResource = new FileSystemResource("C:/entrada/contas.csv");
 
 	public CSVContaReader() {
 		setResource(inputResource);

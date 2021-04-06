@@ -3,6 +3,12 @@ package com.southsystem.desafioreceita.batch.notification;
 import org.springframework.batch.core.JobExecution;
 import org.springframework.batch.core.JobExecutionListener;
 import org.springframework.stereotype.Component;
+
+/**
+ * Classe que gera a notificao da execução do JOB
+ * @author Elnatan Emanuel
+ *
+ */
 @Component
 public class JobListener implements JobExecutionListener {
 

@@ -22,9 +22,23 @@ import com.southsystem.desafioreceita.batch.reader.CSVContaReader;
 import com.southsystem.desafioreceita.batch.writer.CSVContaWriter;
 import com.southsystem.desafioreceita.entidades.Conta;
 
+
+/**
+ * Clase de configuração do Job Conta
+ * @author Elnatan Emanuel
+ *
+ */
+
+
+
 @EnableBatchProcessing
 @Configuration
 public class ContaJob {
+	/**
+	 * Quantas linhas será  porcessadas antes da transação
+	 */
+	
+	final Integer QTD_DE_PROCESSOS_POR_TRANSACAO = 500;
 
 	@Autowired
 	private JobBuilderFactory jobBuilderFactory;
@@ -46,6 +60,10 @@ public class ContaJob {
 
 	@Autowired
 	private CSVContaWriter csvWriter;
+	/**
+	 *  metodo que instancia o Job
+	 * @return Job
+	 */
 
 	@Bean
 	public Job jobConta() {
@@ -55,13 +73,18 @@ public class ContaJob {
 				.start(step1())
 				.build();
 	}
-
+	
+	/**
+	 * Metodo que instacia o Step
+	 * 
+	 * @return Step
+	 */
 	@Bean
 	public Step step1() {
 		return stepBuilderFactory
 				.get("step1")
 				.listener(stepListener)
-				.<Conta, Conta>chunk(300)
+				.<Conta, Conta>chunk(QTD_DE_PROCESSOS_POR_TRANSACAO)
 				.reader(csvReader)
 				.processor(contaToReceitaProcessor)
 				.writer(csvWriter).build();
