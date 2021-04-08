@@ -3,7 +3,7 @@
 
 
 
-## Installation
+## Execução
 
 Para exceutar o software precisa criar um arquivo csv na pasta entra na raiz do sistema:
 
