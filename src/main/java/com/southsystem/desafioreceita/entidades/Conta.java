@@ -10,11 +10,12 @@ import lombok.Setter;
  * @author Elnatan Emanuel
  *
  */
+@Builder
 @Getter
 @Setter
 @AllArgsConstructor
 @NoArgsConstructor
-@Builder
+
 public class Conta {
 	private String agencia;
 	private String conta;

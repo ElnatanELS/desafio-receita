@@ -14,6 +14,8 @@ import com.southsystem.desafioreceita.services.ReceitaService;
 
 @Component
 public class ContaToReceitaProcessor implements ItemProcessor<Conta, Conta> {
+	
+	ReceitaService receitaService = new ReceitaService();
 
 	@Override
 	public Conta process(Conta item) throws Exception {
@@ -24,7 +26,6 @@ public class ContaToReceitaProcessor implements ItemProcessor<Conta, Conta> {
 		contaProcess.setSaldo(item.getSaldo());
 		contaProcess.setStatus(item.getStatus());
 
-		ReceitaService receitaService = new ReceitaService();
 
 		boolean resultado = receitaService.atualizarConta(completeToLeft(item.getAgencia()),
 				item.getConta().replaceAll("-", ""), item.getSaldo(), item.getStatus());
